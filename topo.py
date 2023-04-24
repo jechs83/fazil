@@ -1,0 +1,13 @@
+
+
+from bot_unique import super_bot
+
+ENTERPRISE_TOKEN = "6232310008:AAGd7thShIPpUIlz8SEoxXjlDN4b6EYxJ_A"
+
+ENTERPRISE_CHAT_TOKEN = -1001822901270
+
+TOKEN = ENTERPRISE_TOKEN
+chat_id = ENTERPRISE_CHAT_TOKEN
+bot_token = ENTERPRISE_TOKEN
+
+super_bot(TOKEN, bot_token, chat_id)
