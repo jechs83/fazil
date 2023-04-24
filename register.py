@@ -82,7 +82,7 @@ def register_safa(name,last_name,cel,email):
 
 
 
-register_safa( "topo","topo" ,"999999999" ,"topo2@gmail.com")
+#egister_safa( "topo","topo" ,"999999999" ,"topo2@gmail.com")
 
 
 
