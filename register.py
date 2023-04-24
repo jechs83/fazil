@@ -33,13 +33,14 @@ def register_safa(name,last_name,cel,email):
         #options.add_argument('--window-size=1920,1080')
         
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
         driver.get("https://www.falabella.com.pe/falabella-pe/myaccount/registration")
         # 2 | setWindowSize | 1680x951 | 
         #driver.set_window_size(1680, 951)
         # 3 | click | id=testId-Input-firstName | 
         #driver.find_element(By.ID, "testId-Input-firstName").click()
         # 4 | type | id=testId-Input-firstName | ediardo
+        driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
+
         driver.find_element(By.ID, "testId-Input-firstName").send_keys(name)
         time.sleep(4)
         # 5 | type | id=testId-Input-lastName | sotelo
