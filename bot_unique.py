@@ -92,7 +92,10 @@ def super_bot(TOKEN, bot_token ,chat_id):
                 parse_mode="HTML",text= f"Formato incorrecto: /f nombre appelido celular email, formato de email incorrecto"
                 )
             email = None
-            
+        print(name)
+        print(last_name)
+        print(cel)
+        print(email)
         #pwd=str(var[5])
         if name or last_name or cel or email == None:
             print(" error de data input")
