@@ -97,10 +97,12 @@ def super_bot(TOKEN, bot_token ,chat_id):
         print(cel)
         print(email)
         #pwd=str(var[5])
-        if name or last_name or cel or email == None:
-            print(" error de data input")
+
+        
+        # if name or last_name or cel or email == None:
+        #     print(" error de data input")
         if name and last_name and cel and email != None:
-            if user_id == 1160667522 or 1712594729:
+          
                 bot.sendMessage(
                     chat_id=chat_id,
                     parse_mode="HTML",text= f"Creando cuenta Fazil"
@@ -120,13 +122,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
                     parse_mode="HTML",text= f"Usuario ya existe o hubo error en el proceso "
             
                     )
-            else:
-                bot.sendMessage(
-                    chat_id=chat_id,
-                    parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
-            
-                    )
-
+         
 
       
        
