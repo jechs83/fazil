@@ -28,11 +28,21 @@ def register_safa(name,last_name,cel,email):
          # Test name: registrio
         # Step # | name | target | value
         # 1 | open | /falabella-pe/myaccount/registration | 
+        chrome_options = webdriver.ChromeOptions()
+        # add any desired options to the ChromeOptions object
+
+        chrome_driver_path = 'chromedriver' # replace with the actual path to the chromedriver executable
+
+        driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
+
+
+
+
         options = Options()
         options.add_argument('--headless')
         #options.add_argument('--window-size=1920,1080')
         
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         driver.get("https://www.falabella.com.pe/falabella-pe/myaccount/registration")
         # 2 | setWindowSize | 1680x951 | 
         #driver.set_window_size(1680, 951)
