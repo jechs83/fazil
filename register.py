@@ -42,7 +42,7 @@ def register_safa(name,last_name,cel,email):
         options.add_argument('--headless')
         #options.add_argument('--window-size=1920,1080')
         
-        #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         driver.get("https://www.falabella.com.pe/falabella-pe/myaccount/registration")
         # 2 | setWindowSize | 1680x951 | 
         #driver.set_window_size(1680, 951)
