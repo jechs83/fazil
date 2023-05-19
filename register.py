@@ -10,46 +10,6 @@ import sys
 import pandas as pd
 import random
 
-
-def new_dni():
-    num_dni = 40965239
-    numero_3_digitos = random.randint(100, 999)
-
-    dni_new = num_dni+numero_3_digitos
-    return dni_new
-
-
-
-
-def register_safa(name,last_name,cel,email):  
-        print("SE INICIA")  
-        dni_new =new_dni()
-        pwd =  "Zz.123456"
-         # Test name: registrio
-        # Step # | name | target | value
-        # 1 | open | /falabella-pe/myaccount/registration | 
-        chrome_options = webdriver.ChromeOptions()
-        # add any desired options to the ChromeOptions object
-
-        chrome_driver_path = 'chromedriver' # replace with the actual path to the chromedriver executable
-
-        driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
-
-
-
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by  import By 
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-import time
-import sys
-import pandas as pd
-import random
-
-
 def new_dni():
     num_dni = 40965239
     numero_3_digitos = random.randint(100, 999)
@@ -68,9 +28,13 @@ def register_safa(name,last_name,cel,email):
         # 1 | open | /falabella-pe/myaccount/registration | 
         options = Options()
         options.add_argument('--headless')
-        #options.add_argument('--window-size=1920,1080')
-        
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        chrome_options = webdriver.ChromeOptions()
+        # add any desired options to the ChromeOptions object
+
+        chrome_driver_path = 'chromedriver' # replace with the actual path to the chromedriver executable
+
+        driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
+
         driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
         driver.get("https://www.falabella.com.pe/falabella-pe/myaccount/registration")
         # 2 | setWindowSize | 1680x951 | 
