@@ -13,12 +13,10 @@ def super_bot(TOKEN, bot_token ,chat_id):
         level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,")
     logger = logging.getLogger()
 
-
 ### 1 ENVIA EL STATUS DEL BOT 
     def getBotInfo(update, context):
         bot = context.bot
         chatId= update.message.chat_id
-
 
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId) )
@@ -32,7 +30,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
 
 
-
+    ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
     def fazil_reg(update, context):
         user_id = update.message.from_user.id
         chat_id = update.message.chat_id
@@ -94,43 +92,44 @@ def super_bot(TOKEN, bot_token ,chat_id):
                 parse_mode="HTML",text= f"Formato incorrecto: /f nombre appelido celular email, formato de email incorrecto"
                 )
             email = None
-            
+        print(name)
+        print(last_name)
+        print(cel)
+        print(email)
         #pwd=str(var[5])
-        if name or last_name or cel or email == None:
-            print(" error de data input")
+
+        
+        # if name or last_name or cel or email == None:
+        #     print(" error de data input")
         if name and last_name and cel and email != None:
-            if user_id == 1160667522 or 1712594729:
+          
                 bot.sendMessage(
                     chat_id=chat_id,
                     parse_mode="HTML",text= f"Creando cuenta Fazil"
             
                     )
-      
-                fazil = register_safa(name,last_name,cel,email)
-               
-
-                if fazil == False:
-                     bot.sendMessage(
-                    chat_id=chat_id,
-                    parse_mode="HTML",text= f"El correo ya existe"
-                    )
-                     
-                if fazil == True:
-                     bot.sendMessage(
-                        chat_id=chat_id,
-                        parse_mode="HTML",text= f"Error de Sincronizacion al estilo de Saga falabella, Intenta de nuevo"
-                        )
-                     
-                if fazil =="paso":
+                try:
+                    register_safa(name,last_name,cel,email)
                     bot.sendMessage(
                     chat_id=chat_id,
-                    parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
+                    parse_mode="HTML",text= f"Usuario se creo exitosamente "
+                    )
+                except:
+        
+            
+                    bot.sendMessage(
+                    chat_id=chat_id,
+                    parse_mode="HTML",text= f"Usuario ya existe o hubo error en el proceso "
             
                     )
-
+         
 
       
        
+
+
+
+
     # if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
     print(myBot.getMe())
@@ -140,7 +139,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
     dp= updater.dispatcher
     dp.add_handler(CommandHandler("botinfo", getBotInfo))
 
-    #
+#
 
     dp.add_handler(CommandHandler("f", fazil_reg))
 
