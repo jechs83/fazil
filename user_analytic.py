@@ -63,6 +63,15 @@ url_handler = MessageHandler(Filters.text & (~Filters.command), record_url)
 
 # Define the top users command handler
 def top_users(update: Update, context):
+
+
+    allowed_user_id = 1160667522  # Replace with the desired user ID
+
+    # Check if the command is executed by the allowed user
+    if update.message.from_user.id != allowed_user_id:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="No estas autorizado Ricabro.")
+        return
+    
     # Calculate the date from a week ago
     week_ago = datetime.now() - timedelta(days=7)
 
