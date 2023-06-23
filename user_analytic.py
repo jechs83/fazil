@@ -30,6 +30,7 @@ collection = db['data']
 
 # start_handler = CommandHandler('start', start)
 
+
 # Define the message handler
 def record_url(update: Update, context):
     user_id = update.message.from_user.id
@@ -38,8 +39,12 @@ def record_url(update: Update, context):
     text = update.message.text
 
     # Extract URLs using the regular expression pattern
-
-    urls = re.findall(URL_PATTERN, text)
+    if update.message.forward_from_chat:
+        forwarded_text = update.message.forward_from_chat.text
+        urls = re.findall(URL_PATTERN, forwarded_text)
+    else:
+      urls = re.findall(URL_PATTERN, text)  
+      
     
 
     # Save the user, URLs, name, and date/time to the database
