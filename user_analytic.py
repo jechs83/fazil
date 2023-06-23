@@ -52,11 +52,14 @@ def record_url(update: Update, context):
             if entity.type == 'url':
                 urls.append(update.message.text[entity.offset:entity.offset+entity.length])
 
+    if update.message.caption:
+        caption = update.message.caption
+        urls.extend(re.findall(URL_PATTERN, caption))
+
     if update.message.forward_from_chat:
         forwarded_message = update.message.forward_from_chat
         if forwarded_message.text:
             urls.extend(re.findall(URL_PATTERN, forwarded_message.text))
-
       
     
 
@@ -78,6 +81,7 @@ def record_url(update: Update, context):
     # context.bot.send_message(chat_id=update.effective_chat.id, text="se grabo la url ptm!")
 
 url_handler = MessageHandler(Filters.text & (~Filters.command), record_url)
+
 
 
 
