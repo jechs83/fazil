@@ -12,7 +12,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Define the regular expression pattern to match URLs
-URL_PATTERN = r'((https?://[^\s]+)|^)(www\.[^\s]+)'
+#URL_PATTERN = r'((https?://[^\s]+)|^)(www\.[^\s]+)'
+URL_PATTERN = r'(https?://[^\s]+)'
+
 
 
 #URL_PATTERN = r'(https?://[^\s]+)'
@@ -39,11 +41,14 @@ def record_url(update: Update, context):
     text = update.message.text
 
     # Extract URLs using the regular expression pattern
-    if update.message.forward_from_chat:
+    if update.message.text:
+        text = update.message.text
+        urls = re.findall(URL_PATTERN, text)
+    elif update.message.forward_from_chat:
         forwarded_text = update.message.forward_from_chat.text
         urls = re.findall(URL_PATTERN, forwarded_text)
     else:
-      urls = re.findall(URL_PATTERN, text)  
+        urls = []
       
     
 
