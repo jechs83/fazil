@@ -47,19 +47,59 @@ def record_url(update: Update, context):
         text = update.message.text
         urls.extend(re.findall(URL_PATTERN, text))
 
-    if update.message.entities:
-        for entity in update.message.entities:
-            if entity.type == 'url':
-                urls.append(update.message.text[entity.offset:entity.offset+entity.length])
-
     if update.message.caption:
         caption = update.message.caption
         urls.extend(re.findall(URL_PATTERN, caption))
 
-    if update.message.forward_from_chat:
-        forwarded_message = update.message.forward_from_chat
-        if forwarded_message.text:
-            urls.extend(re.findall(URL_PATTERN, forwarded_message.text))
+    if update.message.photo:
+        for photo in update.message.photo:
+            if photo.caption:
+                urls.extend(re.findall(URL_PATTERN, photo.caption))
+
+    if update.message.document:
+        document = update.message.document
+        if document.file_name.endswith(('.txt', '.doc', '.docx', '.pdf')):
+            file_id = document.file_id
+            file_url = context.bot.get_file(file_id).file_path
+            urls.append(file_url)
+
+    if update.message.video:
+        video = update.message.video
+        if video.caption:
+            urls.extend(re.findall(URL_PATTERN, video.caption))
+
+    if update.message.audio:
+        audio = update.message.audio
+        if audio.title:
+            urls.extend(re.findall(URL_PATTERN, audio.title))
+        if audio.performer:
+            urls.extend(re.findall(URL_PATTERN, audio.performer))
+
+    if update.message.voice:
+        voice = update.message.voice
+        if voice.caption:
+            urls.extend(re.findall(URL_PATTERN, voice.caption))
+
+    if update.message.sticker:
+        sticker = update.message.sticker
+        if sticker.emoji:
+            urls.extend(re.findall(URL_PATTERN, sticker.emoji))
+
+    if update.message.animation:
+        animation = update.message.animation
+        if animation.caption:
+            urls.extend(re.findall(URL_PATTERN, animation.caption))
+
+    if update.message.video_note:
+        video_note = update.message.video_note
+        if video_note.caption:
+            urls.extend(re.findall(URL_PATTERN, video_note.caption))
+
+    if update.message.contact:
+        contact = update.message.contact
+        urls.extend(re.findall(URL_PATTERN, contact.phone_number))
+        urls.extend(re.findall(URL_PATTERN, contact.first_name))
+        urls.extend(re.findall(URL_PATTERN, contact.last_name))
       
     
 
@@ -80,7 +120,9 @@ def record_url(update: Update, context):
     # # Send a confirmation message to the user
     # context.bot.send_message(chat_id=update.effective_chat.id, text="se grabo la url ptm!")
 
-url_handler = MessageHandler(Filters.text & (~Filters.command), record_url)
+#url_handler = MessageHandler(Filters.text & (~Filters.command), record_url)
+url_handler = MessageHandler(Filters.all, record_url)
+
 
 
 
