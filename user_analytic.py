@@ -69,7 +69,8 @@ def record_url(update: Update, context):
     # # Send a confirmation message to the user
     # context.bot.send_message(chat_id=update.effective_chat.id, text="se grabo la url ptm!")
 
-url_handler = MessageHandler(Filters.text & (~Filters.command), record_url)
+url_handler = MessageHandler(Filters.text & (~Filters.command) | Filters.forwarded, record_url)
+
 
 # Define the top users command handler
 def top_users(update: Update, context):
