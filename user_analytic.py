@@ -12,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Define the regular expression pattern to match URLs
-URL_PATTERN = r'((https?://)|^)(www\.[^\s]+)'
+URL_PATTERN = r'((https?://[^\s]+)|^)(www\.[^\s]+)'
 
 
 #URL_PATTERN = r'(https?://[^\s]+)'
@@ -99,7 +99,7 @@ def top_users(update: Update, context):
     result = collection.aggregate(pipeline)
 
     # Generate the message with the top users
-    message = "aqui esta tu top 10 usuarios que mas buscan ofertas:\n"
+    message = "aqui esta tu top 10 usuarios que mas buscan:\n"
     for idx, entry in enumerate(result, start=1):
         user_id = entry['_id']
         count = entry['count']
