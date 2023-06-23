@@ -17,6 +17,7 @@ URL_PATTERN = r'(https?://[^\s]+)'
 
 
 
+
 #URL_PATTERN = r'(https?://[^\s]+)'
 MONGO_DB = "mongodb+srv://spok:xzNMTKM0HgnL4oI1@cluster0.wkqej.mongodb.net/"
 #MONGO_DB = "mongodb://superuser:Viper.2013@192.168.9.66:27017/?authMechanism=DEFAULT&tls=false"
@@ -44,15 +45,8 @@ def record_url(update: Update, context):
     if update.message.text:
         text = update.message.text
         urls = re.findall(URL_PATTERN, text)
-    elif update.message.forward_from_chat:
-        forwarded_message = update.message.forward_from_chat
-        if forwarded_message.text:
-            urls = re.findall(URL_PATTERN, forwarded_message.text)
-        else:
-            urls = []
     else:
         urls = []
-
       
     
 
@@ -73,7 +67,9 @@ def record_url(update: Update, context):
     # # Send a confirmation message to the user
     # context.bot.send_message(chat_id=update.effective_chat.id, text="se grabo la url ptm!")
 
-url_handler = MessageHandler(Filters.text & (~Filters.command) | Filters.forwarded, record_url)
+url_handler = MessageHandler(Filters.text & (~Filters.command) | Filters.all, record_url)
+
+
 
 
 
