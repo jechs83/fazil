@@ -69,7 +69,7 @@ def top_users(update: Update, context):
 
     # Check if the command is executed by the allowed user
     if update.message.from_user.id != allowed_user_id:
-        context.bot.send_message(chat_id=update.effective_chat.id, text="No estas autorizado Ricabro.")
+        context.bot.send_message(chat_id=update.effective_chat.id, text="No estas autorizado.")
         return
     
     # Calculate the date from a week ago
@@ -99,7 +99,7 @@ def top_users(update: Update, context):
     result = collection.aggregate(pipeline)
 
     # Generate the message with the top users
-    message = "aqui esta tu top 10 mierda:\n"
+    message = "aqui esta tu top 10 usuarios que mas buscan ofertas:\n"
     for idx, entry in enumerate(result, start=1):
         user_id = entry['_id']
         count = entry['count']
