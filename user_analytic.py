@@ -45,10 +45,14 @@ def record_url(update: Update, context):
         text = update.message.text
         urls = re.findall(URL_PATTERN, text)
     elif update.message.forward_from_chat:
-        forwarded_text = update.message.forward_from_chat.text
-        urls = re.findall(URL_PATTERN, forwarded_text)
+        forwarded_message = update.message.forward_from_chat
+        if forwarded_message.text:
+            urls = re.findall(URL_PATTERN, forwarded_message.text)
+        else:
+            urls = []
     else:
         urls = []
+
       
     
 
@@ -70,6 +74,8 @@ def record_url(update: Update, context):
     # context.bot.send_message(chat_id=update.effective_chat.id, text="se grabo la url ptm!")
 
 url_handler = MessageHandler(Filters.text & (~Filters.command) | Filters.forwarded, record_url)
+
+
 
 
 # Define the top users command handler
